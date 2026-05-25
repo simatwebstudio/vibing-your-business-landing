@@ -1,0 +1,21 @@
+{
+  "name": "Victory Lap Barber Shop",
+  "short_name": "Victory Lap",
+  "description": "Sito statico di Victory Lap Barber Shop, barberia a Bra.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f0e7",
+  "theme_color": "#3f5038",
+  "lang": "it",
+  "categories": ["business", "lifestyle"],
+  "icons": [
+    {
+      "src": "assets/05-logo-1779377432802-logo.jpg",
+      "sizes": "1024x1024",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
