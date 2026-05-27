@@ -16,13 +16,13 @@ Il sito non richiede build. Si puo' aprire `index.html` direttamente nel browser
 ## Decisioni distintive
 1. Hero minimale ma identitaria: niente card operative sopra la piega, solo brand, promessa e due CTA.
 2. Palette derivata da logo e parete mimetica: verde camo, nero, fondo caldo e accento bordeaux.
-3. La sezione dei 10 tagli e' tipografica per evitare placeholder fotografici; potra' diventare fotografica quando arriveranno asset reali `Taglio1`, `Taglio2`, ecc.
+3. La sezione lineup usa 7 immagini reali dei tagli, da `Taglio1` a `Taglio7`.
 
 ## Asset e font
-Le immagini sono locali e reali. I font sono caricati tramite Google Fonts CSS API: Bebas Neue per headline e Manrope per testi.
+Le immagini sono locali e reali. I font sono self-hosted in `assets/fonts/`: Bebas Neue per headline, Manrope per testi e Barlow Condensed per gli elementi racing.
 
 ## Note SEO e hosting
 Sono presenti title, meta description, Open Graph, JSON-LD, manifest, robots e sitemap. Gli URL `victorylapbarbershop.example` sono placeholder tecnici da sostituire con il dominio definitivo prima della pubblicazione.
 
 ## Privacy
-Il sito non include analytics, form o script di terze parti oltre a Google Fonts e al widget Google Maps nella sezione Dove siamo. Le policy legali definitive non sono state create perche' non sono stati forniti testi approvati.
+Il sito non include analytics, form o widget di terze parti. La sezione Dove siamo usa un'immagine locale e un link esterno per aprire le indicazioni su Maps. La pagina `privacy.html` contiene una bozza con dati fittizi da sostituire prima della pubblicazione.

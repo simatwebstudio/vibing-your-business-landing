@@ -502,12 +502,29 @@ function initAutoplayVideos() {
 
   const play = (video) => {
     video.muted = true;
+    video.defaultMuted = true;
     video.playsInline = true;
+    video.autoplay = true;
+    video.loop = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.setAttribute("autoplay", "");
     video.play().catch(() => {});
+  };
+
+  const retryVisibleVideos = () => {
+    videos.forEach((video) => {
+      const rect = video.getBoundingClientRect();
+      const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+      if (isVisible) play(video);
+    });
   };
 
   if (!("IntersectionObserver" in window)) {
     videos.forEach(play);
+    window.addEventListener("touchstart", retryVisibleVideos, { once: true, passive: true });
+    window.addEventListener("scroll", retryVisibleVideos, { once: true, passive: true });
     return;
   }
 
@@ -531,6 +548,7 @@ function initAutoplayVideos() {
   });
 
   videos.forEach((video) => observer.observe(video));
+  videos.forEach(play);
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
@@ -540,6 +558,11 @@ function initAutoplayVideos() {
 
     visibleVideos.forEach(play);
   });
+
+  window.addEventListener("pageshow", retryVisibleVideos);
+  window.addEventListener("focus", retryVisibleVideos);
+  window.addEventListener("touchstart", retryVisibleVideos, { once: true, passive: true });
+  window.addEventListener("scroll", retryVisibleVideos, { once: true, passive: true });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
