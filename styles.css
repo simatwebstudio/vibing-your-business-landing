@@ -1,3 +1,91 @@
+@font-face {
+  font-family: "Bebas Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/bebas-neue-v16-latin-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/manrope-v20-latin-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/manrope-v20-latin-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/manrope-v20-latin-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/manrope-v20-latin-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("assets/fonts/manrope-v20-latin-800.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/barlow-condensed-v13-latin-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/barlow-condensed-v13-latin-600.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/barlow-condensed-v13-latin-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("assets/fonts/barlow-condensed-v13-latin-800.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("assets/fonts/barlow-condensed-v13-latin-900.woff2") format("woff2");
+}
+
 :root {
   --font-display: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
   --font-body: "Manrope", Arial, sans-serif;
@@ -325,6 +413,82 @@ h3 {
 .btn-secondary:hover {
   background: var(--ink);
   color: var(--paper-strong);
+}
+
+.btn-call {
+  --call-btn-bg: linear-gradient(90deg, #a2988d, #1f4d2e);
+  position: relative;
+  isolation: isolate;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0.9rem 1.25rem;
+  overflow: hidden;
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: var(--call-btn-bg);
+  color: var(--race-white);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+}
+
+.btn-call::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  transform: translateX(-105%) skewX(-18deg);
+  background: #7c9368;
+  transition: transform 300ms ease;
+}
+
+.btn-call:hover,
+.btn-call:focus-visible {
+  border-color: rgba(248, 246, 239, 0.55);
+  color: var(--paper-strong);
+  box-shadow: 0 18px 42px rgba(124, 147, 104, 0.28);
+}
+
+.btn-call:hover::before,
+.btn-call:focus-visible::before {
+  transform: translateX(0) skewX(-18deg) scaleX(1.2);
+}
+
+.phone-icon {
+  display: block;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+}
+
+.btn-whatsapp {
+  gap: 10px;
+  border-color: #25d366;
+  background: #25d366;
+  color: var(--paper-strong);
+}
+
+.btn-whatsapp:hover {
+  background: #128c7e;
+  border-color: #128c7e;
+  color: var(--paper-strong);
+}
+
+.whatsapp-icon {
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
 }
 
 .hero-media {
@@ -1136,38 +1300,77 @@ h3 {
 }
 
 .location-map {
+  isolation: isolate;
   position: relative;
   min-height: 560px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--paper-strong);
+  background: var(--ink);
 }
 
-.location-map iframe {
+.location-map img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border: 0;
+  object-fit: cover;
+  opacity: 0.58;
+  filter: saturate(0.7) contrast(0.9) brightness(0.78);
+  transform: scale(1.02);
+}
+
+.location-map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(255, 250, 240, 0.2), rgba(17, 21, 17, 0.18) 42%, rgba(17, 21, 17, 0.48)),
+    linear-gradient(180deg, rgba(17, 21, 17, 0.08), rgba(17, 21, 17, 0.44));
+  pointer-events: none;
 }
 
 .map-open-link {
   position: absolute;
-  right: 14px;
-  top: 14px;
+  left: 50%;
+  top: 50%;
   z-index: 2;
-  max-width: calc(100% - 28px);
-  padding: 9px 12px;
-  border: 1px solid var(--line);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(calc(100% - 36px), 330px);
+  min-height: 54px;
+  padding: 15px 22px;
+  border: 2px solid rgba(255, 250, 240, 0.9);
   border-radius: var(--radius);
-  background: rgba(255, 250, 240, 0.92);
-  color: var(--olive);
-  font-size: 0.78rem;
+  background: var(--paper-strong);
+  color: var(--ink);
+  font-size: 0.86rem;
   font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
   text-decoration: none;
+  text-align: center;
   text-transform: uppercase;
-  box-shadow: 0 10px 24px rgba(17, 21, 17, 0.12);
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 18px 42px rgba(3, 5, 4, 0.34),
+    0 0 0 8px rgba(255, 250, 240, 0.16);
+  transition:
+    transform var(--ease),
+    background var(--ease),
+    color var(--ease),
+    box-shadow var(--ease);
+}
+
+.map-open-link:hover {
+  background: var(--ink);
+  color: var(--paper-strong);
+  transform: translate(-50%, -52%);
+  box-shadow:
+    0 20px 46px rgba(3, 5, 4, 0.38),
+    0 0 0 8px rgba(255, 250, 240, 0.22);
 }
 
 .contact {
@@ -1200,12 +1403,14 @@ h3 {
   justify-content: center;
 }
 
-.social-link {
-  display: inline-block;
+.contact-actions .instagram-follow-button {
+  margin-top: 0;
+}
+
+.contact-whatsapp {
+  width: min(100%, 360px);
   margin-top: 22px;
-  color: var(--olive);
-  font-weight: 900;
-  text-transform: uppercase;
+  box-shadow: 0 16px 34px rgba(37, 211, 102, 0.24);
 }
 
 .site-footer {
@@ -1218,8 +1423,9 @@ h3 {
   width: min(100%, var(--max));
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.2fr 0.7fr 0.8fr;
-  gap: 36px;
+  grid-template-columns: minmax(240px, 1.1fr) minmax(150px, 0.7fr) minmax(190px, 0.8fr) minmax(250px, 1fr);
+  align-items: start;
+  gap: 34px;
 }
 
 .footer-brand {
@@ -1251,6 +1457,40 @@ h3 {
   color: #d7cfc1;
 }
 
+.footer-column p {
+  margin: 8px 0;
+}
+
+.legal-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  color: #d7cfc1;
+}
+
+.legal-list div {
+  display: grid;
+  gap: 2px;
+}
+
+.legal-list dt {
+  color: rgba(255, 250, 240, 0.72);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.legal-list dd {
+  margin: 0;
+  line-height: 1.35;
+}
+
+.footer-legal a {
+  display: inline;
+  margin: 0;
+}
+
 .footer-bottom {
   width: min(100%, var(--max));
   margin: 34px auto 0;
@@ -1261,6 +1501,65 @@ h3 {
   gap: 18px;
   color: #d7cfc1;
   font-size: 0.86rem;
+}
+
+.footer-legal-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.footer-legal-links a {
+  margin: 0;
+  color: var(--paper-strong);
+}
+
+.privacy-page {
+  min-height: 100vh;
+  padding-top: 120px;
+  background:
+    linear-gradient(135deg, transparent 0 62%, rgba(124, 147, 104, 0.12) 62% 70%, transparent 70%),
+    var(--paper);
+}
+
+.privacy-panel {
+  width: min(100%, 940px);
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 56px);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper-strong);
+  box-shadow: var(--shadow);
+}
+
+.privacy-panel h1 {
+  margin: 12px 0 0;
+  font-size: clamp(3.2rem, 8vw, 5.2rem);
+  line-height: 0.95;
+}
+
+.privacy-panel h2 {
+  margin: 32px 0 10px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.privacy-panel p,
+.privacy-panel li {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.privacy-panel ul {
+  margin: 10px 0 0;
+  padding-left: 22px;
+}
+
+.privacy-panel .btn {
+  margin-top: 28px;
 }
 
 .reveal {
