@@ -274,6 +274,7 @@ function initCutCarousel() {
   let dragLastX = 0;
   let dragStartTime = 0;
   let dragMoved = false;
+  let isTouchPointer = false;
 
   track.setAttribute("tabindex", "0");
   if (!track.id) {
@@ -382,7 +383,8 @@ function initCutCarousel() {
   }, { passive: false });
 
   track.addEventListener("pointerdown", (event) => {
-    if (event.pointerType === "mouse" && event.button !== 0) return;
+    isTouchPointer = event.pointerType === "touch";
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
     if (maxScroll() <= 1) return;
 
     isDragging = true;
@@ -441,7 +443,7 @@ function initCutCarousel() {
   track.addEventListener("pointerleave", stopDragging);
 
   track.addEventListener("click", (event) => {
-    if (!dragMoved) return;
+    if (!dragMoved || isTouchPointer) return;
     event.preventDefault();
     event.stopPropagation();
     dragMoved = false;
@@ -481,6 +483,7 @@ function loadCutCardImages() {
 
       const image = document.createElement("img");
       image.decoding = "async";
+      image.draggable = false;
       image.alt = `Taglio ${index + 1} Victory Lap`;
       image.onload = () => {
         image.loading = "lazy";
@@ -499,6 +502,7 @@ function loadCutCardImages() {
 function initAutoplayVideos() {
   const videos = Array.from(document.querySelectorAll("[data-autoplay-video]"));
   if (!videos.length) return;
+  let unlockAttempted = false;
 
   const play = (video) => {
     video.muted = true;
@@ -510,7 +514,10 @@ function initAutoplayVideos() {
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "");
     video.setAttribute("autoplay", "");
-    video.play().catch(() => {});
+    if (video.readyState === 0) {
+      video.load();
+    }
+    return video.play().catch(() => {});
   };
 
   const retryVisibleVideos = () => {
@@ -521,8 +528,20 @@ function initAutoplayVideos() {
     });
   };
 
+  const unlockVideos = () => {
+    if (unlockAttempted) return;
+    unlockAttempted = true;
+    videos.forEach(play);
+  };
+
+  videos.forEach((video) => {
+    video.addEventListener("loadeddata", () => play(video), { once: true });
+    video.addEventListener("canplay", () => play(video), { once: true });
+  });
+
   if (!("IntersectionObserver" in window)) {
     videos.forEach(play);
+    window.addEventListener("pointerdown", unlockVideos, { once: true, passive: true });
     window.addEventListener("touchstart", retryVisibleVideos, { once: true, passive: true });
     window.addEventListener("scroll", retryVisibleVideos, { once: true, passive: true });
     return;
@@ -561,7 +580,9 @@ function initAutoplayVideos() {
 
   window.addEventListener("pageshow", retryVisibleVideos);
   window.addEventListener("focus", retryVisibleVideos);
+  window.addEventListener("pointerdown", unlockVideos, { once: true, passive: true });
   window.addEventListener("touchstart", retryVisibleVideos, { once: true, passive: true });
+  window.addEventListener("touchend", retryVisibleVideos, { once: true, passive: true });
   window.addEventListener("scroll", retryVisibleVideos, { once: true, passive: true });
 }
 

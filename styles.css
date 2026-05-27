@@ -763,7 +763,7 @@ h3 {
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   cursor: grab;
-  touch-action: pan-y;
+  touch-action: pan-x pan-y;
   user-select: none;
   will-change: scroll-position;
 }
@@ -794,6 +794,7 @@ h3 {
   scroll-snap-stop: normal;
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.38);
   isolation: isolate;
+  contain: layout paint;
 }
 
 .cut-card::before {
@@ -851,6 +852,7 @@ h3 {
   object-fit: cover;
   filter: none;
   image-rendering: auto;
+  pointer-events: none;
   transform: none;
 }
 
@@ -1413,6 +1415,25 @@ h3 {
   box-shadow: 0 16px 34px rgba(37, 211, 102, 0.24);
 }
 
+.privacy-note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.privacy-note a {
+  display: inline;
+  color: var(--ink);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-panel .privacy-note {
+  max-width: 720px;
+}
+
 .site-footer {
   padding: 54px 24px 26px;
   background: var(--ink);
@@ -1532,6 +1553,39 @@ h3 {
   box-shadow: var(--shadow);
 }
 
+.privacy-language-switch {
+  display: inline-flex;
+  gap: 6px;
+  margin-bottom: 26px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(17, 21, 17, 0.04);
+}
+
+.privacy-language-button {
+  min-width: 46px;
+  min-height: 38px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--olive);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.privacy-language-button.is-active {
+  background: var(--ink);
+  color: var(--paper-strong);
+}
+
+.privacy-language-panel[hidden] {
+  display: none;
+}
+
 .privacy-panel h1 {
   margin: 12px 0 0;
   font-size: clamp(3.2rem, 8vw, 5.2rem);
@@ -1556,6 +1610,56 @@ h3 {
 .privacy-panel ul {
   margin: 10px 0 0;
   padding-left: 22px;
+}
+
+.privacy-table-wrap {
+  margin: 18px 0 0;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 250, 240, 0.72);
+}
+
+.privacy-table {
+  width: 100%;
+  min-width: 780px;
+  border-collapse: collapse;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.privacy-table th,
+.privacy-table td {
+  padding: 14px;
+  border-bottom: 1px solid rgba(17, 21, 17, 0.12);
+  text-align: left;
+  vertical-align: top;
+}
+
+.privacy-table th {
+  background: rgba(17, 21, 17, 0.06);
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.privacy-table td:first-child {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.privacy-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.privacy-table a {
+  color: var(--ink);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .privacy-panel .btn {
@@ -1810,6 +1914,9 @@ h3 {
   .cut-track {
     gap: 18px;
     padding-right: 18px;
+    cursor: auto;
+    scroll-snap-type: x proximity;
+    touch-action: pan-x pan-y;
   }
 
   .cut-card {

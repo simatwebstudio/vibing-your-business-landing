@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /_inspection/
 
-Sitemap: https://victorylapbarbershop.example/sitemap.xml
+Sitemap: https://www.victorylapbarbershop.com/sitemap.xml
